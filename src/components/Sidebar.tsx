@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Brain,
   LayoutDashboard,
@@ -15,19 +16,22 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true },
-  { icon: UserCheck, label: "Profiling" },
-  { icon: Brain, label: "Assessment" },
-  { icon: Target, label: "Jobs" },
-  { icon: FileText, label: "Resume AI" },
-  { icon: BarChart3, label: "Skill Gap" },
-  { icon: BookOpen, label: "Courses" },
-  { icon: TrendingUp, label: "Predictions" },
-  { icon: Activity, label: "Behavioral" },
-  { icon: Shield, label: "Security" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/" },
+  { icon: UserCheck, label: "Profiling", path: "/profiling" },
+  { icon: Brain, label: "Assessment", path: "/" },
+  { icon: Target, label: "Jobs", path: "/" },
+  { icon: FileText, label: "Resume AI", path: "/" },
+  { icon: BarChart3, label: "Skill Gap", path: "/" },
+  { icon: BookOpen, label: "Courses", path: "/" },
+  { icon: TrendingUp, label: "Predictions", path: "/" },
+  { icon: Activity, label: "Behavioral", path: "/" },
+  { icon: Shield, label: "Security", path: "/" },
 ];
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <motion.aside
       initial={{ x: -80, opacity: 0 }}
@@ -48,22 +52,27 @@ const Sidebar = () => {
 
       {/* Navigation */}
       <nav className="flex-1 space-y-1">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
-              item.active
-                ? "bg-secondary text-foreground glow-primary"
-                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-            }`}
-          >
-            <item.icon className="w-4 h-4" />
-            <span className="font-medium">{item.label}</span>
-            {item.active && (
-              <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            )}
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.path && (item.label === "Dashboard" ? location.pathname === "/" : true);
+          const isActiveExact = item.path === "/profiling" ? location.pathname === "/profiling" : item.label === "Dashboard" && location.pathname === "/";
+          return (
+            <button
+              key={item.label}
+              onClick={() => navigate(item.path)}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                isActiveExact
+                  ? "bg-secondary text-foreground glow-primary"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+              }`}
+            >
+              <item.icon className="w-4 h-4" />
+              <span className="font-medium">{item.label}</span>
+              {isActiveExact && (
+                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              )}
+            </button>
+          );
+        })}
       </nav>
 
       {/* Footer */}
