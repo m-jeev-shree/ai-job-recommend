@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      user_profiles: {
+        Row: {
+          ai_confidence: number | null
+          ai_extracted_skills: Json | null
+          career_cluster: string | null
+          career_trajectory: string | null
+          created_at: string
+          experience_text: string | null
+          full_name: string | null
+          goals_text: string | null
+          id: string
+          raw_ai_response: Json | null
+          session_id: string
+          skill_levels: Json | null
+          skill_vector: Json | null
+          skills_text: string | null
+          updated_at: string
+        }
+        Insert: {
+          ai_confidence?: number | null
+          ai_extracted_skills?: Json | null
+          career_cluster?: string | null
+          career_trajectory?: string | null
+          created_at?: string
+          experience_text?: string | null
+          full_name?: string | null
+          goals_text?: string | null
+          id?: string
+          raw_ai_response?: Json | null
+          session_id: string
+          skill_levels?: Json | null
+          skill_vector?: Json | null
+          skills_text?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ai_confidence?: number | null
+          ai_extracted_skills?: Json | null
+          career_cluster?: string | null
+          career_trajectory?: string | null
+          created_at?: string
+          experience_text?: string | null
+          full_name?: string | null
+          goals_text?: string | null
+          id?: string
+          raw_ai_response?: Json | null
+          session_id?: string
+          skill_levels?: Json | null
+          skill_vector?: Json | null
+          skills_text?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
