@@ -18,7 +18,7 @@ import {
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
   { icon: UserCheck, label: "Profiling", path: "/profiling" },
-  { icon: Brain, label: "Assessment", path: "/" },
+  { icon: Brain, label: "Assessment", path: "/assessment" },
   { icon: Target, label: "Jobs", path: "/" },
   { icon: FileText, label: "Resume AI", path: "/" },
   { icon: BarChart3, label: "Skill Gap", path: "/" },
@@ -53,8 +53,7 @@ const Sidebar = () => {
       {/* Navigation */}
       <nav className="flex-1 space-y-1">
         {navItems.map((item) => {
-          const isActive = location.pathname === item.path && (item.label === "Dashboard" ? location.pathname === "/" : true);
-          const isActiveExact = item.path === "/profiling" ? location.pathname === "/profiling" : item.label === "Dashboard" && location.pathname === "/";
+          const isActiveExact = item.path !== "/" ? location.pathname === item.path : item.label === "Dashboard" && location.pathname === "/";
           return (
             <button
               key={item.label}

@@ -14,6 +14,121 @@ export type Database = {
   }
   public: {
     Tables: {
+      assessment_questions: {
+        Row: {
+          ai_evaluation: Json | null
+          answered_at: string | null
+          assessment_id: string
+          bloom_level: string
+          created_at: string
+          difficulty: string
+          id: string
+          question_number: number
+          question_text: string
+          question_type: string
+          score: number | null
+          time_estimate_minutes: number | null
+          time_spent_seconds: number | null
+          user_answer: string | null
+        }
+        Insert: {
+          ai_evaluation?: Json | null
+          answered_at?: string | null
+          assessment_id: string
+          bloom_level?: string
+          created_at?: string
+          difficulty?: string
+          id?: string
+          question_number: number
+          question_text: string
+          question_type?: string
+          score?: number | null
+          time_estimate_minutes?: number | null
+          time_spent_seconds?: number | null
+          user_answer?: string | null
+        }
+        Update: {
+          ai_evaluation?: Json | null
+          answered_at?: string | null
+          assessment_id?: string
+          bloom_level?: string
+          created_at?: string
+          difficulty?: string
+          id?: string
+          question_number?: number
+          question_text?: string
+          question_type?: string
+          score?: number | null
+          time_estimate_minutes?: number | null
+          time_spent_seconds?: number | null
+          user_answer?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_questions_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "assessment_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assessment_sessions: {
+        Row: {
+          bloom_distribution: Json | null
+          completed_at: string | null
+          correct_answers: number
+          created_at: string
+          current_difficulty: string
+          difficulty: string
+          id: string
+          profile_id: string | null
+          questions_answered: number
+          session_id: string
+          status: string
+          topic: string
+          total_questions: number
+        }
+        Insert: {
+          bloom_distribution?: Json | null
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          current_difficulty?: string
+          difficulty?: string
+          id?: string
+          profile_id?: string | null
+          questions_answered?: number
+          session_id: string
+          status?: string
+          topic: string
+          total_questions?: number
+        }
+        Update: {
+          bloom_distribution?: Json | null
+          completed_at?: string | null
+          correct_answers?: number
+          created_at?: string
+          current_difficulty?: string
+          difficulty?: string
+          id?: string
+          profile_id?: string | null
+          questions_answered?: number
+          session_id?: string
+          status?: string
+          topic?: string
+          total_questions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assessment_sessions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "user_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_profiles: {
         Row: {
           ai_confidence: number | null
